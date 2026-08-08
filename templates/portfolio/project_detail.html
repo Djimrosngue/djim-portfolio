@@ -1,0 +1,118 @@
+{% extends "portfolio/base.html" %}
+
+{% block title %}
+{{ project.title }} | Portfolio
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <div class="container">
+
+        <span>
+            PROJET
+        </span>
+
+        <h1>
+            {{ project.title }}
+        </h1>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="row g-5">
+
+            <div class="col-lg-7">
+
+                {% if project.image %}
+
+                <img
+                    src="{{ project.image.url }}"
+                    class="project-detail-image"
+                    alt="{{ project.title }}"
+                >
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="col-lg-5">
+
+                <h2>
+                    {{ project.title }}
+                </h2>
+
+                <p class="lead">
+                    {{ project.short_description }}
+                </p>
+
+                <p>
+                    {{ project.description }}
+                </p>
+
+
+                <h5 class="mt-4">
+                    Technologies
+                </h5>
+
+                <div class="tech-list">
+
+                    {% for tech in project.technology_list %}
+
+                    <span>
+                        {{ tech }}
+                    </span>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="mt-4">
+
+                    {% if project.github_url %}
+
+                    <a
+                        href="{{ project.github_url }}"
+                        target="_blank"
+                        class="btn btn-dark me-2"
+                    >
+                        <i class="bi bi-github"></i>
+                        GitHub
+                    </a>
+
+                    {% endif %}
+
+
+                    {% if project.demo_url %}
+
+                    <a
+                        href="{{ project.demo_url }}"
+                        target="_blank"
+                        class="btn btn-primary-custom"
+                    >
+                        Voir la démo
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

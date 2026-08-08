@@ -1,0 +1,323 @@
+{% extends "portfolio/base.html" %}
+
+{% block title %}
+Djimrosngue Justin | IT Support & Technology
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="row align-items-center min-vh-100">
+
+            <div class="col-lg-7">
+
+                <div class="hero-badge">
+                    <span></span>
+                    Disponible pour opportunités
+                </div>
+
+                <h1>
+
+                    Bonjour, je suis
+
+                    <strong>
+                        {{ profile.name|default:"Djimrosngue Ngarhodjim Justin" }}
+                    </strong>
+
+                </h1>
+
+                <h2>
+                    {{ profile.headline|default:"IT Support | Systèmes & Réseaux | Full-Stack | IoT" }}
+                </h2>
+
+                <p class="hero-text">
+
+                    {{ profile.short_bio|default:"Je conçois et développe des solutions technologiques combinant informatique, logiciels, systèmes embarqués et IoT." }}
+
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <a
+                        href="{% url 'portfolio:projects' %}"
+                        class="btn btn-primary-custom btn-lg"
+                    >
+                        Voir mes projets
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                    <a
+                        href="{% url 'portfolio:contact' %}"
+                        class="btn btn-outline-custom btn-lg"
+                    >
+                        Me contacter
+                    </a>
+
+                </div>
+
+
+                <div class="tech-tags">
+
+                    <span>Python</span>
+                    <span>Django</span>
+                    <span>Flutter</span>
+                    <span>IoT</span>
+                    <span>ESP32</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-5">
+
+                <div class="hero-card">
+
+                    <div class="code-window">
+
+                        <div class="code-header">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                        <div class="code-body">
+
+                            <p>
+                                <span class="code-purple">class</span>
+                                <span class="code-green">Developer</span>:
+                            </p>
+
+                            <p class="indent">
+                                mission =
+                                <span class="code-yellow">
+                                    "Build solutions"
+                                </span>
+                            </p>
+
+                            <p class="indent">
+                                skills = [
+                            </p>
+
+                            <p class="indent-2">
+                                <span class="code-yellow">
+                                    "IT Support"
+                                </span>,
+                            </p>
+
+                            <p class="indent-2">
+                                <span class="code-yellow">
+                                    "Django"
+                                </span>,
+                            </p>
+
+                            <p class="indent-2">
+                                <span class="code-yellow">
+                                    "Flutter"
+                                </span>,
+                            </p>
+
+                            <p class="indent-2">
+                                <span class="code-yellow">
+                                    "IoT"
+                                </span>
+                            </p>
+
+                            <p class="indent">
+                                ]
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>
+                EXPERTISE
+            </span>
+
+            <h2>
+                Ce que je fais
+            </h2>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            {% for service in services %}
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+
+                        <i class="bi {{ service.icon }}"></i>
+
+                    </div>
+
+                    <h3>
+                        {{ service.title }}
+                    </h3>
+
+                    <p>
+                        {{ service.description }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <p>
+                    Ajoutez vos services depuis Django Admin.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section section-light">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>
+                PORTFOLIO
+            </span>
+
+            <h2>
+                Projets sélectionnés
+            </h2>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            {% for project in projects %}
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="project-card">
+
+                    {% if project.image %}
+
+                    <img
+                        src="{{ project.image.url }}"
+                        alt="{{ project.title }}"
+                    >
+
+                    {% else %}
+
+                    <div class="project-placeholder">
+
+                        <i class="bi bi-code-square"></i>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <div class="project-content">
+
+                        <h3>
+                            {{ project.title }}
+                        </h3>
+
+                        <p>
+                            {{ project.short_description }}
+                        </p>
+
+                        <a
+                            href="{{ project.get_absolute_url }}"
+                            class="project-link"
+                        >
+                            Découvrir
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12 text-center">
+
+                <p>
+                    Ajoutez vos projets depuis Django Admin.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="cta-section">
+
+    <div class="container text-center">
+
+        <span>
+            UNE IDÉE ? UN PROJET ?
+        </span>
+
+        <h2>
+            Construisons quelque chose d'utile.
+        </h2>
+
+        <a
+            href="{% url 'portfolio:contact' %}"
+            class="btn btn-light btn-lg"
+        >
+            Démarrer une conversation
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
