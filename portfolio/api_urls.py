@@ -13,44 +13,37 @@ from .api_views import (
 
 urlpatterns = [
 
-    path(
-        "profile/",
+    path("profile/",
         ProfileAPIView.as_view(),
         name="api-profile",
     ),
 
-    path(
-        "skills/",
+    path("skills/",
         SkillListAPIView.as_view(),
         name="api-skills",
     ),
 
-    path(
-        "services/",
+    path("services/",
         ServiceListAPIView.as_view(),
         name="api-services",
     ),
 
-    path(
-        "projects/",
+    path("projects/",
         ProjectListAPIView.as_view(),
         name="api-projects",
     ),
 
-    path(
-        "projects/<slug:slug>/",
+    path("projects/<slug:slug>/",
         ProjectDetailAPIView.as_view(),
         name="api-project-detail",
     ),
 
-    path(
-        "education/",
+    path("education/",
         EducationListAPIView.as_view(),
         name="api-education",
     ),
 
-    path(
-        "contact/",
+    path("contact/",
         ContactCreateAPIView.as_view(),
         name="api-contact",
     ),
