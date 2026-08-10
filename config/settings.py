@@ -1,13 +1,32 @@
 from pathlib import Path
-
+from dotenv import load_dotenv
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-&9++k42t9f-2v=3p4fj84^g=b#j9=u$(z^o0&e6_bmd-%(j7xp'
+load_dotenv(BASE_DIR / ".env")
 
-DEBUG = True
 
-ALLOWED_HOSTS = []
+SECRET_KEY = os.getenv(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-&9++k42t9f-2v=3p4fj84^g=b#j9=u$(z^o0&e6_bmd-%(j7xp",
+)
+
+DEBUG = os.getenv(
+    "DJANGO_DEBUG",
+    "False",
+).lower() == "true"
+
+
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "10.165.223.96",
+]
+
+
+
+
 
 
 INSTALLED_APPS = [
@@ -26,6 +45,10 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+# middleware pour la langue
+    "django.middleware.locale.LocaleMiddleware",
+
+
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -67,11 +90,11 @@ DATABASES = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "djim_portfolio",
-        "USER": "justin",
-        "PASSWORD": "justin",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST", "localhost"),
+        "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
 
@@ -91,7 +114,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = "fr-fr"
+LANGUAGE_CODE = "fr"
+
+LANGUAGES = [
+    ("fr", "Français"),
+    ("en", "English"),
+]
 
 TIME_ZONE = "Africa/Ndjamena"
 

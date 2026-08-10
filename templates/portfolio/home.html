@@ -1,323 +1,1248 @@
-{% extends "portfolio/base.html" %}
+{% load static %}
+{% load i18n %}
 
-{% block title %}
-Djimrosngue Justin | IT Support & Technology
-{% endblock %}
+<!DOCTYPE html>
 
+<html lang="{{ LANGUAGE_CODE|default:'fr' }}">
 
-{% block content %}
+<head>
 
-<section class="hero">
+<meta charset="UTF-8">
 
-    <div class="container">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-        <div class="row align-items-center min-vh-100">
+<meta
+    name="description"
+    content="Portfolio professionnel de Djimrosngue Justin - IT Support, développement web, mobile et IoT au Tchad."
+>
 
-            <div class="col-lg-7">
-
-                <div class="hero-badge">
-                    <span></span>
-                    Disponible pour opportunités
-                </div>
-
-                <h1>
-
-                    Bonjour, je suis
-
-                    <strong>
-                        {{ profile.name|default:"Djimrosngue Ngarhodjim Justin" }}
-                    </strong>
-
-                </h1>
-
-                <h2>
-                    {{ profile.headline|default:"IT Support | Systèmes & Réseaux | Full-Stack | IoT" }}
-                </h2>
-
-                <p class="hero-text">
-
-                    {{ profile.short_bio|default:"Je conçois et développe des solutions technologiques combinant informatique, logiciels, systèmes embarqués et IoT." }}
-
-                </p>
+<title>
+    {% if profile %}
+        {{ profile.name }} | {{ profile.headline }}
+    {% else %}
+        Djimrosngue Justin | IT Support
+    {% endif %}
+</title>
 
 
-                <div class="hero-actions">
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+>
 
-                    <a
-                        href="{% url 'portfolio:projects' %}"
-                        class="btn btn-primary-custom btn-lg"
-                    >
-                        Voir mes projets
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-
-                    <a
-                        href="{% url 'portfolio:contact' %}"
-                        class="btn btn-outline-custom btn-lg"
-                    >
-                        Me contacter
-                    </a>
-
-                </div>
+<link
+    rel="stylesheet"
+    href="{% static 'portfolio/css/style.css' %}"
+>
 
 
-                <div class="tech-tags">
+</head>
 
-                    <span>Python</span>
-                    <span>Django</span>
-                    <span>Flutter</span>
-                    <span>IoT</span>
-                    <span>ESP32</span>
+<body>
 
-                </div>
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
-            </div>
+<header class="navbar">
 
 
-            <div class="col-lg-5">
+<div class="container nav-container">
 
-                <div class="hero-card">
 
-                    <div class="code-window">
+    <a
+        href="#home"
+        class="logo"
+    >
+        DJIM<span>.</span>
+    </a>
 
-                        <div class="code-header">
 
-                            <span></span>
-                            <span></span>
-                            <span></span>
+    <nav id="nav-menu">
 
-                        </div>
 
-                        <div class="code-body">
+        <a href="#home">
+            {% trans "Accueil" %}
+        </a>
 
-                            <p>
-                                <span class="code-purple">class</span>
-                                <span class="code-green">Developer</span>:
-                            </p>
 
-                            <p class="indent">
-                                mission =
-                                <span class="code-yellow">
-                                    "Build solutions"
-                                </span>
-                            </p>
+        <a href="#about">
+            {% trans "À propos" %}
+        </a>
 
-                            <p class="indent">
-                                skills = [
-                            </p>
 
-                            <p class="indent-2">
-                                <span class="code-yellow">
-                                    "IT Support"
-                                </span>,
-                            </p>
+        <a href="#skills">
+            {% trans "Compétences" %}
+        </a>
 
-                            <p class="indent-2">
-                                <span class="code-yellow">
-                                    "Django"
-                                </span>,
-                            </p>
 
-                            <p class="indent-2">
-                                <span class="code-yellow">
-                                    "Flutter"
-                                </span>,
-                            </p>
+        <a href="#services">
+            {% trans "Services" %}
+        </a>
 
-                            <p class="indent-2">
-                                <span class="code-yellow">
-                                    "IoT"
-                                </span>
-                            </p>
 
-                            <p class="indent">
-                                ]
-                            </p>
+        <a href="#projects">
+            {% trans "Projets" %}
+        </a>
 
-                        </div>
 
-                    </div>
+        <a href="#education">
+            {% trans "Formation" %}
+        </a>
 
-                </div>
 
-            </div>
+        <a href="#contact">
+            {% trans "Contact" %}
+        </a>
+
+
+        <!-- LANGUAGE -->
+
+        <div class="language-switcher">
+
+            <form
+                action="{% url 'set_language' %}"
+                method="post"
+            >
+
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    name="next"
+                    value="{{ request.path }}"
+                >
+
+
+                <button
+                    type="submit"
+                    name="language"
+                    value="fr"
+                    class="{% if LANGUAGE_CODE == 'fr' %}active{% endif %}"
+                >
+                    FR
+                </button>
+
+
+                <button
+                    type="submit"
+                    name="language"
+                    value="en"
+                    class="{% if LANGUAGE_CODE == 'en' %}active{% endif %}"
+                >
+                    EN
+                </button>
+
+            </form>
 
         </div>
+
+
+        <!-- THEME -->
+
+        <button
+            id="theme-toggle"
+            class="theme-toggle"
+            type="button"
+            aria-label="{% trans 'Changer le thème' %}"
+        >
+
+            <i
+                id="theme-icon"
+                class="bi bi-moon"
+            ></i>
+
+        </button>
+
+
+    </nav>
+
+
+    <!-- MOBILE MENU -->
+
+    <button
+        id="menu-button"
+        class="menu-button"
+        type="button"
+        aria-label="{% trans 'Ouvrir le menu' %}"
+        aria-expanded="false"
+    >
+        <i class="bi bi-list"></i>
+    </button>
+
+
+</div>
+
+
+</header>
+
+<main>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+    id="home"
+    class="hero"
+>
+
+<div class="container hero-container">
+
+
+    <div class="hero-content">
+
+
+        <p class="hero-label">
+
+            👋 {% trans "Bonjour, je suis" %}
+
+        </p>
+
+
+        <h1>
+
+            {% if profile %}
+
+                {{ profile.name }}
+
+            {% else %}
+
+                Djimrosngue Justin
+
+            {% endif %}
+
+        </h1>
+
+
+        <h2>
+
+            {% if profile %}
+
+                {{ profile.headline }}
+
+            {% else %}
+
+                {% trans "IT Support & Solutions Digitales" %}
+
+            {% endif %}
+
+        </h2>
+
+
+        <p class="hero-description">
+
+            {% if profile %}
+
+                {{ profile.short_bio }}
+
+            {% else %}
+
+                {% trans "Je conçois et mets en place des solutions informatiques, web, mobiles et IoT adaptées aux besoins des entreprises et organisations au Tchad." %}
+
+            {% endif %}
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+
+            <a
+                href="#projects"
+                class="btn btn-primary"
+            >
+
+                <i class="bi bi-folder2-open"></i>
+
+                {% trans "Voir mes projets" %}
+
+            </a>
+
+
+            <a
+                href="#contact"
+                class="btn btn-outline"
+            >
+
+                <i class="bi bi-envelope"></i>
+
+                {% trans "Me contacter" %}
+
+            </a>
+
+
+            {% if profile and profile.cv %}
+
+                <a
+                    href="{{ profile.cv.url }}"
+                    class="btn btn-cv"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <i class="bi bi-file-earmark-pdf"></i>
+
+                    {% trans "Voir mon CV" %}
+
+                </a>
+
+            {% endif %}
+
+
+        </div>
+
+
+        <!-- SOCIAL LINKS -->
+
+        <div class="social-links">
+
+
+            {% if profile and profile.github %}
+
+                <a
+                    href="{{ profile.github }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                >
+
+                    <i class="bi bi-github"></i>
+
+                    GitHub
+
+                </a>
+
+            {% endif %}
+
+
+            {% if profile and profile.linkedin %}
+
+                <a
+                    href="{{ profile.linkedin }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                >
+
+                    <i class="bi bi-linkedin"></i>
+
+                    LinkedIn
+
+                </a>
+
+            {% endif %}
+
+
+            {% if profile and profile.whatsapp %}
+
+                <a
+                    href="https://wa.me/{{ profile.whatsapp }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                >
+
+                    <i class="bi bi-whatsapp"></i>
+
+                    WhatsApp
+
+                </a>
+
+            {% endif %}
+
+
+        </div>
+
 
     </div>
 
-</section>
 
 
-<section class="section">
+    <!-- PROFILE -->
 
-    <div class="container">
+    <div class="hero-visual">
 
-        <div class="section-heading">
 
-            <span>
-                EXPERTISE
-            </span>
+        <div class="profile-card">
 
-            <h2>
-                Ce que je fais
-            </h2>
+
+            {% if profile and profile.profile_image %}
+
+                <img
+                    src="{{ profile.profile_image.url }}"
+                    alt="{{ profile.name }}"
+                    class="profile-image"
+                >
+
+            {% else %}
+
+                <div class="profile-icon">
+
+                    <i class="bi bi-person"></i>
+
+                </div>
+
+            {% endif %}
+
+
+            <h3>
+
+                {% if profile %}
+
+                    {{ profile.name }}
+
+                {% else %}
+
+                    Djimrosngue Justin
+
+                {% endif %}
+
+            </h3>
+
+
+            <p>
+
+                {% trans "IT Support • Web • Mobile • IoT" %}
+
+            </p>
+
 
         </div>
 
 
-        <div class="row g-4">
+    </div>
 
-            {% for service in services %}
 
-            <div class="col-md-6 col-lg-4">
+</div>
 
-                <div class="service-card">
 
-                    <div class="service-icon">
+</section>
 
-                        <i class="bi {{ service.icon }}"></i>
+<!-- =====================================================
+     ABOUT
+===================================================== -->
 
-                    </div>
+<section
+    id="about"
+    class="section"
+>
 
-                    <h3>
-                        {{ service.title }}
-                    </h3>
 
-                    <p>
-                        {{ service.description }}
-                    </p>
+<div class="container">
+
+
+    <div class="section-header">
+
+
+        <p class="section-label">
+
+            {% trans "À PROPOS" %}
+
+        </p>
+
+
+        <h2>
+
+            {% if profile %}
+
+                {{ profile.headline }}
+
+            {% else %}
+
+                {% trans "Un profil polyvalent orienté solutions" %}
+
+            {% endif %}
+
+        </h2>
+
+
+    </div>
+
+
+
+    <div class="about-grid">
+
+
+        <div class="about-content">
+
+
+            {% if profile and profile.about %}
+
+                {{ profile.about|linebreaks }}
+
+            {% elif profile %}
+
+                <p>
+                    {{ profile.short_bio }}
+                </p>
+
+            {% else %}
+
+                <p>
+                    {% trans "Passionné par les technologies informatiques et le développement de solutions numériques." %}
+                </p>
+
+            {% endif %}
+
+
+            {% if profile and profile.location %}
+
+                <p class="about-location">
+
+                    <i class="bi bi-geo-alt"></i>
+
+                    {{ profile.location }}
+
+                </p>
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        <div class="about-stats">
+
+
+            {% for skill in skills|slice:":4" %}
+
+
+                <div class="stat">
+
+
+                    <strong>
+
+                        {{ skill.name }}
+
+                    </strong>
+
+
+                    <span>
+
+                        {{ skill.get_category_display }}
+
+                    </span>
+
 
                 </div>
 
-            </div>
 
             {% empty %}
 
-            <div class="col-12">
 
-                <p>
-                    Ajoutez vos services depuis Django Admin.
-                </p>
+                <div class="stat">
 
-            </div>
+                    <strong>IT</strong>
+
+                    <span>
+                        {% trans "Support" %}
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <strong>Web</strong>
+
+                    <span>
+                        Django
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <strong>Mobile</strong>
+
+                    <span>
+                        Flutter
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <strong>IoT</strong>
+
+                    <span>
+                        ESP32
+                    </span>
+
+                </div>
+
 
             {% endfor %}
 
+
         </div>
+
 
     </div>
 
+
+</div>
+
+
 </section>
 
+<!-- =====================================================
+     SKILLS
+===================================================== -->
 
-<section class="section section-light">
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <span>
-                PORTFOLIO
-            </span>
-
-            <h2>
-                Projets sélectionnés
-            </h2>
-
-        </div>
+<section
+    id="skills"
+    class="section section-light"
+>
 
 
-        <div class="row g-4">
+<div class="container">
 
-            {% for project in projects %}
 
-            <div class="col-md-6 col-lg-4">
+    <div class="section-header">
 
-                <div class="project-card">
 
-                    {% if project.image %}
+        <p class="section-label">
+
+            {% trans "COMPÉTENCES" %}
+
+        </p>
+
+
+        <h2>
+
+            {% trans "Technologies que j'utilise" %}
+
+        </h2>
+
+
+    </div>
+
+
+
+    <div class="skills-grid">
+
+
+        {% for skill in skills %}
+
+
+            <article class="skill-card">
+
+
+                <div class="skill-header">
+
+
+                    <h3>
+
+                        {{ skill.name }}
+
+                    </h3>
+
+
+                    <span>
+
+                        {{ skill.level }}%
+
+                    </span>
+
+
+                </div>
+
+
+                <p>
+
+                    {{ skill.get_category_display }}
+
+                </p>
+
+
+                <div class="skill-progress">
+
+
+                    <div
+                        class="skill-progress-bar"
+                        style="width: {{ skill.level }}%;"
+                    ></div>
+
+
+                </div>
+
+
+                {% if skill.description %}
+
+                    <small>
+
+                        {{ skill.description }}
+
+                    </small>
+
+                {% endif %}
+
+
+            </article>
+
+
+        {% empty %}
+
+
+            <p class="empty-message">
+
+                {% trans "Ajoutez vos compétences depuis Django Admin." %}
+
+            </p>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section
+    id="services"
+    class="section"
+>
+
+
+<div class="container">
+
+
+    <div class="section-header">
+
+
+        <p class="section-label">
+
+            {% trans "SERVICES" %}
+
+        </p>
+
+
+        <h2>
+
+            {% trans "Ce que je peux faire pour vous" %}
+
+        </h2>
+
+
+    </div>
+
+
+
+    <div class="services-grid">
+
+
+        {% for service in services %}
+
+
+            <article class="service-card">
+
+
+                <div class="service-icon">
+
+                    <i
+                        class="bi {{ service.icon }}"
+                    ></i>
+
+                </div>
+
+
+                <h3>
+
+                    {{ service.title }}
+
+                </h3>
+
+
+                <p>
+
+                    {{ service.description }}
+
+                </p>
+
+
+            </article>
+
+
+        {% empty %}
+
+
+            <p class="empty-message">
+
+                {% trans "Ajoutez vos services depuis Django Admin." %}
+
+            </p>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section
+    id="projects"
+    class="section section-light"
+>
+
+
+<div class="container">
+
+
+    <div class="section-header">
+
+
+        <p class="section-label">
+
+            {% trans "PROJETS" %}
+
+        </p>
+
+
+        <h2>
+
+            {% trans "Mes réalisations" %}
+
+        </h2>
+
+
+    </div>
+
+
+
+    <div class="projects-grid">
+
+
+        {% for project in projects %}
+
+
+            <article class="project-card">
+
+
+                {% if project.image %}
+
 
                     <img
                         src="{{ project.image.url }}"
                         alt="{{ project.title }}"
                     >
 
-                    {% else %}
+
+                {% else %}
+
 
                     <div class="project-placeholder">
 
-                        <i class="bi bi-code-square"></i>
+                        <i class="bi bi-rocket-takeoff"></i>
 
                     </div>
 
-                    {% endif %}
+
+                {% endif %}
 
 
-                    <div class="project-content">
 
-                        <h3>
-                            {{ project.title }}
-                        </h3>
+                <div class="project-content">
 
-                        <p>
-                            {{ project.short_description }}
-                        </p>
+
+                    <h3>
+
+                        {{ project.title }}
+
+                    </h3>
+
+
+                    <p>
+
+                        {{ project.short_description }}
+
+                    </p>
+
+
+                    <!-- TECHNOLOGIES -->
+
+                    <div class="project-tech">
+
+
+                        {% for technology in project.technology_list %}
+
+
+                            <span>
+
+                                {{ technology }}
+
+                            </span>
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="project-links">
+
 
                         <a
-                            href="{{ project.get_absolute_url }}"
-                            class="project-link"
+                            href="{% url 'portfolio:project_detail' project.slug %}"
+                            class="btn-project btn-project-primary"
                         >
-                            Découvrir
-                            <i class="bi bi-arrow-right"></i>
+
+                            <i class="bi bi-eye"></i>
+
+                            {% trans "Voir le projet" %}
+
                         </a>
 
+
+
+                        {% if project.github_url %}
+
+
+                            <a
+                                href="{{ project.github_url }}"
+                                class="btn-project btn-project-github"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+
+                                <i class="bi bi-github"></i>
+
+                                GitHub
+
+                            </a>
+
+
+                        {% endif %}
+
+
+
+                        {% if project.demo_url %}
+
+
+                            <a
+                                href="{{ project.demo_url }}"
+                                class="btn-project btn-project-demo"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+
+                                <i class="bi bi-box-arrow-up-right"></i>
+
+                                {% trans "Démo" %}
+
+                            </a>
+
+
+                        {% endif %}
+
+
                     </div>
+
 
                 </div>
 
-            </div>
 
-            {% empty %}
+            </article>
 
-            <div class="col-12 text-center">
 
-                <p>
-                    Ajoutez vos projets depuis Django Admin.
-                </p>
+        {% empty %}
 
-            </div>
 
-            {% endfor %}
+            <p class="empty-message">
 
-        </div>
+                {% trans "Ajoutez vos projets depuis Django Admin." %}
+
+            </p>
+
+
+        {% endfor %}
+
 
     </div>
 
+
+</div>
+
+
 </section>
 
+<!-- =====================================================
+     EDUCATION
+===================================================== -->
 
-<section class="cta-section">
+<section
+    id="education"
+    class="section"
+>
 
-    <div class="container text-center">
 
-        <span>
-            UNE IDÉE ? UN PROJET ?
-        </span>
+<div class="container">
+
+
+    <div class="section-header">
+
+
+        <p class="section-label">
+
+            {% trans "PARCOURS" %}
+
+        </p>
+
 
         <h2>
-            Construisons quelque chose d'utile.
+
+            {% trans "Formation" %}
+
         </h2>
 
-        <a
-            href="{% url 'portfolio:contact' %}"
-            class="btn btn-light btn-lg"
-        >
-            Démarrer une conversation
-        </a>
 
     </div>
 
+
+
+    <div class="timeline">
+
+
+        {% for item in educations %}
+
+
+            <div class="timeline-item">
+
+
+                <span class="timeline-date">
+
+                    {{ item.start_year }}
+
+                    {% if item.end_year %}
+
+                        - {{ item.end_year }}
+
+                    {% else %}
+
+                        -
+                        {% trans "Présent" %}
+
+                    {% endif %}
+
+                </span>
+
+
+                <h3>
+
+                    {{ item.title }}
+
+                </h3>
+
+
+                <h4>
+
+                    {{ item.institution }}
+
+                </h4>
+
+
+                {% if item.description %}
+
+                    <p>
+
+                        {{ item.description }}
+
+                    </p>
+
+                {% endif %}
+
+
+            </div>
+
+
+        {% empty %}
+
+
+            <p class="empty-message">
+
+                {% trans "Ajoutez votre parcours depuis Django Admin." %}
+
+            </p>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+</div>
+
+
 </section>
 
-{% endblock %}
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section
+    id="contact"
+    class="section contact-section"
+>
+
+
+<div class="container">
+
+
+    <div class="section-header">
+
+
+        <p class="section-label">
+
+            {% trans "CONTACT" %}
+
+        </p>
+
+
+        <h2>
+
+            {% trans "Travaillons ensemble" %}
+
+        </h2>
+
+
+        <p>
+
+            {% trans "Vous avez un problème informatique, un projet web, mobile ou IoT ? Contactez-moi." %}
+
+        </p>
+
+
+    </div>
+
+
+
+    <div class="contact-buttons">
+
+
+        {% if profile and profile.email %}
+
+
+            <a
+                href="mailto:{{ profile.email }}"
+                class="btn btn-primary"
+            >
+
+                <i class="bi bi-envelope"></i>
+
+                {% trans "Envoyer un message" %}
+
+            </a>
+
+
+        {% endif %}
+
+
+
+        {% if profile and profile.whatsapp %}
+
+
+            <a
+                href="https://wa.me/{{ profile.whatsapp }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-whatsapp"
+            >
+
+                <i class="bi bi-whatsapp"></i>
+
+                WhatsApp
+
+            </a>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+</section>
+
+</main>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="container">
+
+
+    <p>
+
+        ©
+        {% now "Y" %}
+
+        {% if profile %}
+
+            {{ profile.name }}
+
+        {% else %}
+
+            Djimrosngue Justin
+
+        {% endif %}
+
+        
+
+        {% trans "Tous droits réservés." %}
+
+    </p>
+
+
+    <p>
+
+        {% trans "IT Support • Web • Mobile • IoT" %}
+
+    </p>
+
+
+</div>
+
+</footer>
+
+<script src="{% static 'portfolio/js/main.js' %}"></script>
+
+<script src="{% static 'portfolio/js/theme.js' %}"></script>
+
+</body>
+
+</html>

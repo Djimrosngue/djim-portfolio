@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
 
 from .forms import ContactForm
 from .models import (
@@ -9,6 +10,8 @@ from .models import (
     Project,
     Service,
     Skill,
+    SiteVisit,
+    ContactMessage,
 )
 
 
@@ -127,4 +130,44 @@ def contact(request):
             "profile": profile,
             "form": form,
         },
+    )
+
+
+@login_required
+def dashboard(request):
+
+    context = {
+        "profile_count": Profile.objects.count(),
+
+        "project_count": Project.objects.count(),
+
+        "featured_projects": Project.objects.filter(
+            featured=True
+        ).count(),
+
+        "service_count": Service.objects.filter(
+            active=True
+        ).count(),
+
+        "skill_count": Skill.objects.count(),
+
+        "education_count": Education.objects.count(),
+
+        "message_count": ContactMessage.objects.count(),
+
+        "visit_count": SiteVisit.objects.count(),
+
+        "recent_projects": Project.objects.order_by(
+            "-created_at"
+        )[:5],
+
+        "recent_messages": ContactMessage.objects.order_by(
+            "-created_at"
+        )[:5],
+    }
+
+    return render(
+        request,
+        "portfolio/dashboard/index.html",
+        context,
     )

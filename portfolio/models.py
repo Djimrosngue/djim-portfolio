@@ -262,3 +262,27 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.subject}"
+    
+class SiteVisit(models.Model):
+    ip_address = models.GenericIPAddressField(
+        null=True,
+        blank=True,
+    )
+
+    path = models.CharField(
+        max_length=255,
+    )
+
+    user_agent = models.TextField(
+        blank=True,
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.ip_address} - {self.path}"

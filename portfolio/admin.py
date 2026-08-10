@@ -7,15 +7,30 @@ from .models import (
     Project,
     Service,
     Skill,
+    SiteVisit,
 )
 
-
+admin.site.register(SiteVisit)
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "headline",
+        "email",
+        "phone",
         "location",
+        "updated_at",
+    )
+
+    search_fields = (
+        "name",
+        "headline",
+        "email",
+        "phone",
+        "location",
+    )
+
+    readonly_fields = (
         "updated_at",
     )
 
@@ -33,6 +48,16 @@ class SkillAdmin(admin.ModelAdmin):
         "category",
     )
 
+    search_fields = (
+        "name",
+        "description",
+    )
+
+    list_editable = (
+        "level",
+        "order",
+    )
+
     ordering = (
         "order",
         "name",
@@ -43,12 +68,28 @@ class SkillAdmin(admin.ModelAdmin):
 class ServiceAdmin(admin.ModelAdmin):
     list_display = (
         "title",
+        "icon",
         "active",
         "order",
     )
 
     list_filter = (
         "active",
+    )
+
+    search_fields = (
+        "title",
+        "description",
+    )
+
+    list_editable = (
+        "active",
+        "order",
+    )
+
+    ordering = (
+        "order",
+        "title",
     )
 
 
@@ -56,6 +97,7 @@ class ServiceAdmin(admin.ModelAdmin):
 class ProjectAdmin(admin.ModelAdmin):
     list_display = (
         "title",
+        "slug",
         "featured",
         "order",
         "created_at",
@@ -63,11 +105,33 @@ class ProjectAdmin(admin.ModelAdmin):
 
     list_filter = (
         "featured",
+        "created_at",
+    )
+
+    search_fields = (
+        "title",
+        "short_description",
+        "description",
+        "technologies",
     )
 
     prepopulated_fields = {
         "slug": ("title",),
     }
+
+    list_editable = (
+        "featured",
+        "order",
+    )
+
+    readonly_fields = (
+        "created_at",
+    )
+
+    ordering = (
+        "order",
+        "-created_at",
+    )
 
 
 @admin.register(Education)
@@ -77,6 +141,24 @@ class EducationAdmin(admin.ModelAdmin):
         "institution",
         "start_year",
         "end_year",
+        "order",
+    )
+
+    search_fields = (
+        "title",
+        "institution",
+        "description",
+    )
+
+    list_editable = (
+        "start_year",
+        "end_year",
+        "order",
+    )
+
+    ordering = (
+        "-start_year",
+        "order",
     )
 
 
@@ -86,8 +168,8 @@ class ContactMessageAdmin(admin.ModelAdmin):
         "name",
         "email",
         "subject",
-        "created_at",
         "is_read",
+        "created_at",
     )
 
     list_filter = (
@@ -95,6 +177,21 @@ class ContactMessageAdmin(admin.ModelAdmin):
         "created_at",
     )
 
+    search_fields = (
+        "name",
+        "email",
+        "subject",
+        "message",
+    )
+
+    list_editable = (
+        "is_read",
+    )
+
     readonly_fields = (
         "created_at",
+    )
+
+    ordering = (
+        "-created_at",
     )

@@ -1,57 +1,40 @@
 from django.urls import path
 
-from .api_views import (
-    ContactCreateAPIView,
-    EducationListAPIView,
-    ProfileAPIView,
-    ProjectDetailAPIView,
-    ProjectListAPIView,
-    ServiceListAPIView,
-    SkillListAPIView,
-)
+from . import views
+
+
+app_name = "portfolio"
 
 
 urlpatterns = [
+    path("", views.home, name="home"),
 
-    path(
-        "profile/",
-        ProfileAPIView.as_view(),
-        name="api-profile",
-    ),
-
-    path(
-        "skills/",
-        SkillListAPIView.as_view(),
-        name="api-skills",
-    ),
-
+  
     path(
         "services/",
-        ServiceListAPIView.as_view(),
-        name="api-services",
+        views.services,
+        name="services",
     ),
 
     path(
-        "projects/",
-        ProjectListAPIView.as_view(),
-        name="api-projects",
+        "projets/",
+        views.projects,
+        name="projects",
     ),
 
     path(
-        "projects/<slug:slug>/",
-        ProjectDetailAPIView.as_view(),
-        name="api-project-detail",
-    ),
-
-    path(
-        "education/",
-        EducationListAPIView.as_view(),
-        name="api-education",
+        "projets/<slug:slug>/",
+        views.project_detail,
+        name="project_detail",
     ),
 
     path(
         "contact/",
-        ContactCreateAPIView.as_view(),
-        name="api-contact",
+        views.contact,
+        name="contact",
+    ),
+      path("dashboard/",
+       views.dashboard,
+        name="dashboard",
     ),
 ]
