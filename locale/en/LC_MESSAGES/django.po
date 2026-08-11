@@ -1,0 +1,185 @@
+# English translations for the portfolio project.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Portfolio\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 01:48+0200\n"
+"PO-Revision-Date: 2026-08-11 02:30+0200\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\portfolio\home.html:68
+msgid "Accueil"
+msgstr "Home"
+
+#: .\templates\portfolio\home.html:73
+msgid "À propos"
+msgstr "About"
+
+#: .\templates\portfolio\home.html:78
+msgid "Compétences"
+msgstr "Skills"
+
+#: .\templates\portfolio\home.html:83
+msgid "Services"
+msgstr "Services"
+
+#: .\templates\portfolio\home.html:88
+msgid "Projets"
+msgstr "Projects"
+
+#: .\templates\portfolio\home.html:93 .\templates\portfolio\home.html:1022
+msgid "Formation"
+msgstr "Education"
+
+#: .\templates\portfolio\home.html:98
+msgid "Contact"
+msgstr "Contact"
+
+#: .\templates\portfolio\home.html:150
+msgid "Changer le thème"
+msgstr "Change theme"
+
+#: .\templates\portfolio\home.html:170
+msgid "Ouvrir le menu"
+msgstr "Open menu"
+
+#: .\templates\portfolio\home.html:201
+msgid "Bonjour, je suis"
+msgstr "Hello, I am"
+
+#: .\templates\portfolio\home.html:229
+msgid "IT Support & Solutions Digitales"
+msgstr "IT Support & Digital Solutions"
+
+#: .\templates\portfolio\home.html:244
+msgid ""
+"Je conçois et mets en place des solutions informatiques, web, mobiles et "
+"IoT adaptées aux besoins des entreprises et organisations au Tchad."
+msgstr ""
+"I design and implement IT, web, mobile and IoT solutions tailored to the "
+"needs of businesses and organizations in Chad."
+
+#: .\templates\portfolio\home.html:261
+msgid "Voir mes projets"
+msgstr "View my projects"
+
+#: .\templates\portfolio\home.html:273
+msgid "Me contacter"
+msgstr "Contact me"
+
+#: .\templates\portfolio\home.html:289
+msgid "Voir mon CV"
+msgstr "View my CV"
+
+#: .\templates\portfolio\home.html:409 .\templates\portfolio\home.html:1233
+msgid "IT Support • Web • Mobile • IoT"
+msgstr "IT Support • Web • Mobile • IoT"
+
+#: .\templates\portfolio\home.html:443
+msgid "À PROPOS"
+msgstr "ABOUT"
+
+#: .\templates\portfolio\home.html:456
+msgid "Un profil polyvalent orienté solutions"
+msgstr "A versatile, solution-oriented profile"
+
+#: .\templates\portfolio\home.html:486
+msgid ""
+"Passionné par les technologies informatiques et le développement de "
+"solutions numériques."
+msgstr ""
+"Passionate about IT technologies and digital solution development."
+
+#: .\templates\portfolio\home.html:543
+msgid "Support"
+msgstr "Support"
+
+#: .\templates\portfolio\home.html:614
+msgid "COMPÉTENCES"
+msgstr "SKILLS"
+
+#: .\templates\portfolio\home.html:621
+msgid "Technologies que j'utilise"
+msgstr "Technologies I use"
+
+#: .\templates\portfolio\home.html:697
+msgid "Ajoutez vos compétences depuis Django Admin."
+msgstr "Add your skills from Django Admin."
+
+#: .\templates\portfolio\home.html:731
+msgid "SERVICES"
+msgstr "SERVICES"
+
+#: .\templates\portfolio\home.html:738
+msgid "Ce que je peux faire pour vous"
+msgstr "What I can do for you"
+
+#: .\templates\portfolio\home.html:787
+msgid "Ajoutez vos services depuis Django Admin."
+msgstr "Add your services from Django Admin."
+
+#: .\templates\portfolio\home.html:821
+msgid "PROJETS"
+msgstr "PROJECTS"
+
+#: .\templates\portfolio\home.html:828
+msgid "Mes réalisations"
+msgstr "My projects"
+
+#: .\templates\portfolio\home.html:920
+msgid "Voir le projet"
+msgstr "View project"
+
+#: .\templates\portfolio\home.html:959
+msgid "Démo"
+msgstr "Demo"
+
+#: .\templates\portfolio\home.html:981
+msgid "Ajoutez vos projets depuis Django Admin."
+msgstr "Add your projects from Django Admin."
+
+#: .\templates\portfolio\home.html:1015
+msgid "PARCOURS"
+msgstr "CAREER"
+
+#: .\templates\portfolio\home.html:1051
+msgid "Présent"
+msgstr "Present"
+
+#: .\templates\portfolio\home.html:1091
+msgid "Ajoutez votre parcours depuis Django Admin."
+msgstr "Add your career history from Django Admin."
+
+#: .\templates\portfolio\home.html:1125
+msgid "CONTACT"
+msgstr "CONTACT"
+
+#: .\templates\portfolio\home.html:1132
+msgid "Travaillons ensemble"
+msgstr "Let's work together"
+
+#: .\templates\portfolio\home.html:1139
+msgid ""
+"Vous avez un problème informatique, un projet web, mobile ou IoT ? "
+"Contactez-moi."
+msgstr ""
+"Do you have an IT problem or a web, mobile or IoT project? "
+"Contact me."
+
+#: .\templates\portfolio\home.html:1161
+msgid "Envoyer un message"
+msgstr "Send a message"
+
+#: .\templates\portfolio\home.html:1226
+msgid "Tous droits réservés."
+msgstr "All rights reserved."

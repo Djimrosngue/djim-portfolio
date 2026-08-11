@@ -33,6 +33,19 @@ urlpatterns = [
         views.contact,
         name="contact",
     ),
+
+    # Authentification
+    path(
+        "login/",
+        views.dashboard_login,
+        name="login"
+    ),
+
+    path(
+        "logout/",
+        views.dashboard_logout,
+        name="logout"
+    ),
       path("dashboard/",
        views.dashboard,
         name="dashboard",

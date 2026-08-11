@@ -127,6 +127,16 @@ USE_I18N = True
 
 USE_TZ = True
 
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
+]
+
+
+LOGIN_URL = "portfolio:login"
+
+LOGIN_REDIRECT_URL = "dashboard"
+
+LOGOUT_REDIRECT_URL = "portfolio:login"
 
 STATIC_URL = "static/"
 
