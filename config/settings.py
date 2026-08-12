@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv(
 
 DEBUG = os.getenv(
     "DJANGO_DEBUG",
-    "True",
+    "False",
 ).lower() == "true"
 
 
@@ -44,13 +44,10 @@ ALLOWED_HOSTS = [
 ]
 
 # Render
-RENDER_EXTERNAL_HOSTNAME = os.getenv(
-    "RENDER_EXTERNAL_HOSTNAME"
-)
+RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
 
 # Domaine personnalisé éventuel
 CUSTOM_DOMAIN = os.getenv("CUSTOM_DOMAIN")
@@ -64,7 +61,6 @@ if CUSTOM_DOMAIN:
 # =========================================================
 
 INSTALLED_APPS = [
-
     # Model translation
     "modeltranslation",
 
@@ -89,7 +85,6 @@ INSTALLED_APPS = [
 # =========================================================
 
 MIDDLEWARE = [
-
     "django.middleware.security.SecurityMiddleware",
 
     # Static files production
@@ -135,7 +130,6 @@ TEMPLATES = [
 
         "OPTIONS": {
             "context_processors": [
-
                 "django.template.context_processors.request",
 
                 "django.contrib.auth.context_processors.auth",
@@ -174,6 +168,7 @@ if DATABASE_URL:
         "default": dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=600,
+            conn_health_checks=True,
             ssl_require=not DEBUG,
         )
     }
@@ -182,21 +177,17 @@ else:
 
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("DB_NAME"),
-            "USER": os.getenv("DB_USER"),
-            "PASSWORD": os.getenv("DB_PASSWORD"),
-            "HOST": os.getenv("DB_HOST", "localhost"),
-            "PORT": os.getenv("DB_PORT", "5432"),
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+
 
 # =========================================================
 # PASSWORD VALIDATION
 # =========================================================
 
 AUTH_PASSWORD_VALIDATORS = [
-
     {
         "NAME":
         "django.contrib.auth.password_validation."
@@ -270,9 +261,6 @@ MODELTRANSLATION_FALLBACK_LANGUAGES = (
 # AUTHENTICATION
 # =========================================================
 
-# Si tu n'as pas encore de système de connexion personnalisé,
-# évite les URLs inexistantes.
-
 LOGIN_REDIRECT_URL = "/"
 
 LOGOUT_REDIRECT_URL = "/"
@@ -284,25 +272,28 @@ LOGOUT_REDIRECT_URL = "/"
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATICFILES_DIRS = []
+
+STATIC_DIR = BASE_DIR / "static"
+
+if STATIC_DIR.exists():
+    STATICFILES_DIRS.append(STATIC_DIR)
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
-# WhiteNoise
-STORAGES = {
+# =========================================================
+# WHITENOISE
+# =========================================================
 
+STORAGES = {
     "default": {
-        "BACKEND":
-        "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
 
     "staticfiles": {
         "BACKEND":
-        "whitenoise.storage."
-        "CompressedManifestStaticFilesStorage",
+        "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
@@ -320,9 +311,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 # DEFAULT PRIMARY KEY
 # =========================================================
 
-DEFAULT_AUTO_FIELD = (
-    "django.db.models.BigAutoField"
-)
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # =========================================================
@@ -344,12 +333,38 @@ if not DEBUG:
 
     SECURE_SSL_REDIRECT = True
 
+    SECURE_PROXY_SSL_HEADER = (
+        "HTTP_X_FORWARDED_PROTO",
+        "https",
+    )
+
     SESSION_COOKIE_SECURE = True
 
     CSRF_COOKIE_SECURE = True
 
-    SECURE_BROWSER_XSS_FILTER = True
-
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
     X_FRAME_OPTIONS = "DENY"
+
+    SECURE_HSTS_SECONDS = 31536000
+
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+    SECURE_HSTS_PRELOAD = True
+
+
+# =========================================================
+# CSRF TRUSTED ORIGINS
+# =========================================================
+
+CSRF_TRUSTED_ORIGINS = []
+
+if RENDER_EXTERNAL_HOSTNAME:
+    CSRF_TRUSTED_ORIGINS.append(
+        f"https://{RENDER_EXTERNAL_HOSTNAME}"
+    )
+
+if CUSTOM_DOMAIN:
+    CSRF_TRUSTED_ORIGINS.append(
+        f"https://{CUSTOM_DOMAIN}"
+    )
