@@ -1,34 +1,63 @@
+# =========================
 # Python
+# =========================
+
 __pycache__/
 *.py[cod]
 *.pyo
+*.pyd
 
-# Virtual environment
+# =========================
+# Virtual environments
+# =========================
+
 venv/
-myenv/
 .venv/
+env/
+.env/
+myenv/
 
+# =========================
+# Environment variables
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# =========================
 # Django
+# =========================
+
 db.sqlite3
 *.sqlite3
+
 media/
 staticfiles/
 
-# Environment variables
-.myenv
-.myenv.*
-
+# =========================
 # IDE
+# =========================
+
 .vscode/
 .idea/
 
+# =========================
 # OS
+# =========================
+
 .DS_Store
 Thumbs.db
 
+# =========================
 # Secrets
+# =========================
+
 *.pem
 *.key
 
+# =========================
 # Logs
+# =========================
+
 *.log

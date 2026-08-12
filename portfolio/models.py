@@ -86,7 +86,6 @@ class Skill(models.Model):
         ("DATA", "Data"),
         ("OTHER", "Autre"),
     ]
-
     name = models.CharField(max_length=100)
 
     category = models.CharField(

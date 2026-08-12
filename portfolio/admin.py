@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from modeltranslation.admin import TranslationAdmin
+
 from .models import (
     ContactMessage,
     Education,
@@ -10,9 +12,49 @@ from .models import (
     SiteVisit,
 )
 
-admin.site.register(SiteVisit)
+
+# ============================================================
+# SITE VISITS
+# ============================================================
+
+@admin.register(SiteVisit)
+class SiteVisitAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "ip_address",
+        "path",
+        "created_at",
+    )
+
+    list_filter = (
+        "created_at",
+    )
+
+    search_fields = (
+        "ip_address",
+        "path",
+        "user_agent",
+    )
+
+    readonly_fields = (
+        "ip_address",
+        "path",
+        "user_agent",
+        "created_at",
+    )
+
+    ordering = (
+        "-created_at",
+    )
+
+
+# ============================================================
+# PROFILE
+# ============================================================
+
 @admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
+class ProfileAdmin(TranslationAdmin):
+
     list_display = (
         "name",
         "headline",
@@ -25,6 +67,8 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = (
         "name",
         "headline",
+        "short_bio",
+        "about",
         "email",
         "phone",
         "location",
@@ -35,8 +79,13 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 
 
+# ============================================================
+# SKILL
+# ============================================================
+
 @admin.register(Skill)
-class SkillAdmin(admin.ModelAdmin):
+class SkillAdmin(TranslationAdmin):
+
     list_display = (
         "name",
         "category",
@@ -64,8 +113,13 @@ class SkillAdmin(admin.ModelAdmin):
     )
 
 
+# ============================================================
+# SERVICE
+# ============================================================
+
 @admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
+class ServiceAdmin(TranslationAdmin):
+
     list_display = (
         "title",
         "icon",
@@ -93,8 +147,13 @@ class ServiceAdmin(admin.ModelAdmin):
     )
 
 
+# ============================================================
+# PROJECT
+# ============================================================
+
 @admin.register(Project)
-class ProjectAdmin(admin.ModelAdmin):
+class ProjectAdmin(TranslationAdmin):
+
     list_display = (
         "title",
         "slug",
@@ -115,10 +174,6 @@ class ProjectAdmin(admin.ModelAdmin):
         "technologies",
     )
 
-    prepopulated_fields = {
-        "slug": ("title",),
-    }
-
     list_editable = (
         "featured",
         "order",
@@ -134,8 +189,13 @@ class ProjectAdmin(admin.ModelAdmin):
     )
 
 
+# ============================================================
+# EDUCATION
+# ============================================================
+
 @admin.register(Education)
-class EducationAdmin(admin.ModelAdmin):
+class EducationAdmin(TranslationAdmin):
+
     list_display = (
         "title",
         "institution",
@@ -162,8 +222,13 @@ class EducationAdmin(admin.ModelAdmin):
     )
 
 
+# ============================================================
+# CONTACT MESSAGES
+# ============================================================
+
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
+
     list_display = (
         "name",
         "email",
