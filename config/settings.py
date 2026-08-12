@@ -25,7 +25,7 @@ load_dotenv(BASE_DIR / ".env")
 
 SECRET_KEY = os.getenv(
     "DJANGO_SECRET_KEY",
-    "django-insecure-dev-key-change-this-in-production",
+    "5ap685plbzps&i^jk-21aq^60x#$mg6j@@w&dw(yzs4d-jor@4",
 )
 
 DEBUG = os.getenv(
