@@ -1,33 +1,33 @@
-# Django Developer Portfolio
+Parfait. On passe au README final de djim-portfolio.
 
-> A modern, responsive and bilingual developer portfolio built with Django.
+Comme ton dépôt est destiné à être vu par des recruteurs, je te conseille un README sobre, professionnel et réaliste, sans prétendre que le projet possède des fonctionnalités qui ne sont pas réellement présentes.
 
-## Overview
+Remplace le contenu actuel de README.md par ceci :
 
-This project is my personal developer portfolio, designed to present my technical skills, professional profile, services and software projects through a clean and responsive web interface.
+# Djim Portfolio
 
-The application is built with Django and includes bilingual support, a dynamic project management system, an administration dashboard and production-ready deployment configuration.
+> Personal developer portfolio built with Django.
 
----
+## About
+
+Djim Portfolio is my personal web portfolio, developed to present my professional profile, technical skills, services and software projects.
+
+The application is built with Django and designed with a focus on clean architecture, responsive design, bilingual content and production deployment.
 
 ## Features
 
-- 🌍 French / English bilingual interface
-- 👤 Personal profile and professional information
-- 💼 Projects portfolio
-- 🛠️ Technical skills management
-- 📋 Services presentation
-- 🔐 Secure Django authentication
-- 📊 Administration dashboard
-- 🌐 REST API support
-- 🗄️ SQLite for local development
-- 🐘 PostgreSQL for production
-- 🚀 Render deployment support
-- ⚡ WhiteNoise for static files
-- 📱 Responsive design
-- 🔒 Production security configuration
-
----
+- Professional profile
+- Projects showcase
+- Technical skills
+- Services presentation
+- Responsive web interface
+- French / English support
+- Django administration
+- Project and profile content management
+- PostgreSQL support for production
+- SQLite support for local development
+- Static files management with WhiteNoise
+- Production deployment configuration for Render
 
 ## Tech Stack
 
@@ -36,9 +36,13 @@ The application is built with Django and includes bilingual support, a dynamic p
 - Python
 - Django
 - Django REST Framework
-- PostgreSQL
-- SQLite
 - django-modeltranslation
+
+### Database
+
+- SQLite for local development
+- PostgreSQL for production
+- `dj-database-url`
 
 ### Frontend
 
@@ -50,154 +54,221 @@ The application is built with Django and includes bilingual support, a dynamic p
 ### Deployment
 
 - Render
+- Gunicorn
 - WhiteNoise
-- PostgreSQL
 
-### Development Tools
+### Tools
 
 - Git
 - GitHub
 - Visual Studio Code
 
+## Project Structure
 
-Local Installation
+```text
+djim-portfolio/
+│
+├── config/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│   └── ...
+│
+├── portfolio/
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── admin.py
+│   └── ...
+│
+├── templates/
+│   └── ...
+│
+├── static/
+│   └── ...
+│
+├── locale/
+│   └── ...
+│
+├── manage.py
+├── requirements.txt
+├── build.sh
+├── .env.example
+├── .gitignore
+└── README.md
+
+Installation
 
 1. Clone the repository
 
 git clone https://github.com/Djimrosngue/djim-portfolio.git
-
-cd djim-portfolio 
+cd djim-portfolio
 
 2. Create a virtual environment
-   
+
 Windows:
+
 python -m venv venv
 venv\Scripts\activate
 
 Linux / macOS:
+
 python3 -m venv venv
 source venv/bin/activate
 
-3.Install dependencies
-   
+3. Install dependencies
+
 pip install -r requirements.txt
 
 4. Configure environment variables
-   
-Create a .env file from .env.example.
-Example:
+
+Create a .env file based on .env.example.
+
 DJANGO_SECRET_KEY=your-secret-key
-
 DJANGO_DEBUG=True
-
 DATABASE_URL=
-
 RENDER_EXTERNAL_HOSTNAME=
-
 CUSTOM_DOMAIN=
 
+
 5. Apply migrations
-    
+
 python manage.py migrate
 
 6. Create an administrator
-    
+
 python manage.py createsuperuser
 
 7. Collect static files
-    
+
 python manage.py collectstatic
 
 8. Run the development server
-    
+
 python manage.py runserver
-The application will be available at:
+
+Open:
+
 http://127.0.0.1:8000/
 
-Database
+Environment Variables
 
-The project automatically uses:
+Variable	Description
+
+DJANGO_SECRET_KEY	Django secret key
+DJANGO_DEBUG	Enables or disables debug mode
+DATABASE_URL	PostgreSQL connection URL
+RENDER_EXTERNAL_HOSTNAME	Render hostname
+CUSTOM_DOMAIN	Optional custom domain
+
+
+Database Configuration
+
+The project supports two database configurations.
 
 Development
 
-SQLite when DATABASE_URL is not configured.
+SQLite is used automatically when DATABASE_URL is not defined.
 
 Production
 
-PostgreSQL when DATABASE_URL is provided.
-This allows the same project to work locally and in production without changing the source code.
+PostgreSQL is used when DATABASE_URL is provided.
+
+This allows the application to use a lightweight local database while remaining ready for production deployment.
 
 Internationalization
 
 The portfolio supports:
 
-🇫🇷 French
+French
 
-🇬🇧 English
+English
 
-Language management is implemented using Django internationalization and django-modeltranslation.
+
+Django internationalization and django-modeltranslation are used to manage multilingual content.
+
 French is the default language.
 
 Security
 
-Production security settings include:
+Sensitive configuration is managed through environment variables.
+
+Production security configuration includes:
+
 HTTPS redirection
+
 Secure session cookies
+
 Secure CSRF cookies
+
 HSTS
+
 X-Frame-Options
-Content-type protection
-Environment-based secret management
-Sensitive configuration is stored outside the source code using environment variables.
+
+Content-Type protection
+
+
+The .env file is excluded from version control.
 
 Deployment
 
 The project is configured for deployment on Render.
 
-Production uses:
+Production components include:
+
 Django
+
 PostgreSQL
-WhiteNoise
-Environment variables
+
 Gunicorn
-Before deployment, configure the required environment variables in the Render dashboard.
+
+WhiteNoise
+
+Environment variables
+
+
+The build.sh script is used to prepare the application during deployment.
 
 Future Improvements
 
-Planned improvements may include:
+Planned improvements include:
 
-📧 Production email service
+Automated testing
 
-📈 Portfolio analytics
+Continuous integration with GitHub Actions
 
-🔎 Advanced project filtering
+Production email service
 
-📝 Blog section
+Portfolio analytics
 
-📬 Contact form improvements
+Improved project filtering
 
-🌐 Custom domain
+Contact form enhancements
 
-🧪 Automated testing
+Custom domain
 
-🔄 CI/CD with GitHub Actions
 
 Author
 
 Djimrosngue Ngarhodjim Justin
 
 Python / Django Developer
+
 Interested in:
+
 Web Development
+
 IoT
+
 Mobile Development
+
 Software Engineering
+
 Data & Business Intelligence
 
-Contact
-
-For professional opportunities, collaborations or technical projects, feel free to connect with me through my professional profiles.
 
 License
-This project is available for educational and portfolio purposes.
-Please contact the author before reusing significant parts of the source code or design.
+
+This project is presented as a personal portfolio and learning project.
+
+© Djimrosngue Ngarhodjim Justin
