@@ -1,9 +1,3 @@
-Parfait. On passe au README final de djim-portfolio.
-
-Comme ton dépôt est destiné à être vu par des recruteurs, je te conseille un README sobre, professionnel et réaliste, sans prétendre que le projet possède des fonctionnalités qui ne sont pas réellement présentes.
-
-Remplace le contenu actuel de README.md par ceci :
-
 # Djim Portfolio
 
 > Personal developer portfolio built with Django.
