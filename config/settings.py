@@ -23,10 +23,13 @@ load_dotenv(BASE_DIR / ".env")
 # SECURITY
 # =========================================================
 
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY",
-    "5ap685plbzps&i^jk-21aq^60x#$mg6j@@w&dw(yzs4d-jor@4",
-)
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+
+if not SECRET_KEY:
+    raise ValueError(
+        "DJANGO_SECRET_KEY environment variable is not set."
+    )
+
 
 DEBUG = os.getenv(
     "DJANGO_DEBUG",
@@ -44,16 +47,24 @@ ALLOWED_HOSTS = [
 ]
 
 # Render
-RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+RENDER_EXTERNAL_HOSTNAME = os.getenv(
+    "RENDER_EXTERNAL_HOSTNAME"
+)
 
 if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    ALLOWED_HOSTS.append(
+        RENDER_EXTERNAL_HOSTNAME
+    )
 
-# Domaine personnalisé éventuel
-CUSTOM_DOMAIN = os.getenv("CUSTOM_DOMAIN")
+# Custom domain
+CUSTOM_DOMAIN = os.getenv(
+    "CUSTOM_DOMAIN"
+)
 
 if CUSTOM_DOMAIN:
-    ALLOWED_HOSTS.append(CUSTOM_DOMAIN)
+    ALLOWED_HOSTS.append(
+        CUSTOM_DOMAIN
+    )
 
 
 # =========================================================
@@ -61,6 +72,7 @@ if CUSTOM_DOMAIN:
 # =========================================================
 
 INSTALLED_APPS = [
+
     # Model translation
     "modeltranslation",
 
@@ -85,6 +97,7 @@ INSTALLED_APPS = [
 # =========================================================
 
 MIDDLEWARE = [
+
     "django.middleware.security.SecurityMiddleware",
 
     # Static files production
@@ -152,15 +165,17 @@ WSGI_APPLICATION = "config.wsgi.application"
 # DATABASE
 # =========================================================
 #
-# LOCAL :
-# SQLite si aucune DATABASE_URL n'est définie.
+# LOCAL:
+# SQLite si DATABASE_URL n'est pas définie.
 #
-# RENDER :
+# PRODUCTION:
 # PostgreSQL via DATABASE_URL.
 #
 # =========================================================
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv(
+    "DATABASE_URL"
+)
 
 if DATABASE_URL:
 
@@ -188,6 +203,7 @@ else:
 # =========================================================
 
 AUTH_PASSWORD_VALIDATORS = [
+
     {
         "NAME":
         "django.contrib.auth.password_validation."
@@ -272,12 +288,14 @@ LOGOUT_REDIRECT_URL = "/login/"
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = []
-
 STATIC_DIR = BASE_DIR / "static"
 
+STATICFILES_DIRS = []
+
 if STATIC_DIR.exists():
-    STATICFILES_DIRS.append(STATIC_DIR)
+    STATICFILES_DIRS.append(
+        STATIC_DIR
+    )
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
@@ -287,13 +305,16 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # =========================================================
 
 STORAGES = {
+
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND":
+        "django.core.files.storage.FileSystemStorage",
     },
 
     "staticfiles": {
         "BACKEND":
-        "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "whitenoise.storage."
+        "CompressedManifestStaticFilesStorage",
     },
 }
 
@@ -311,7 +332,9 @@ MEDIA_ROOT = BASE_DIR / "media"
 # DEFAULT PRIMARY KEY
 # =========================================================
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+DEFAULT_AUTO_FIELD = (
+    "django.db.models.BigAutoField"
+)
 
 
 # =========================================================
@@ -322,7 +345,9 @@ EMAIL_BACKEND = (
     "django.core.mail.backends.console.EmailBackend"
 )
 
-DEFAULT_FROM_EMAIL = "portfolio@localhost"
+DEFAULT_FROM_EMAIL = (
+    "portfolio@localhost"
+)
 
 
 # =========================================================
@@ -360,11 +385,13 @@ if not DEBUG:
 CSRF_TRUSTED_ORIGINS = []
 
 if RENDER_EXTERNAL_HOSTNAME:
+
     CSRF_TRUSTED_ORIGINS.append(
         f"https://{RENDER_EXTERNAL_HOSTNAME}"
     )
 
 if CUSTOM_DOMAIN:
+
     CSRF_TRUSTED_ORIGINS.append(
         f"https://{CUSTOM_DOMAIN}"
     )
