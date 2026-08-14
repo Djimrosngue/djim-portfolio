@@ -78,7 +78,7 @@ Linux / macOS:
 python3 -m venv venv
 source venv/bin/activate
 
- 3.Install dependencies
+3.Install dependencies
    
 pip install -r requirements.txt
 
@@ -126,12 +126,16 @@ This allows the same project to work locally and in production without changing 
 Internationalization
 
 The portfolio supports:
+
 🇫🇷 French
+
 🇬🇧 English
+
 Language management is implemented using Django internationalization and django-modeltranslation.
 French is the default language.
 
 Security
+
 Production security settings include:
 HTTPS redirection
 Secure session cookies
@@ -145,6 +149,7 @@ Sensitive configuration is stored outside the source code using environment vari
 Deployment
 
 The project is configured for deployment on Render.
+
 Production uses:
 Django
 PostgreSQL
@@ -156,18 +161,27 @@ Before deployment, configure the required environment variables in the Render da
 Future Improvements
 
 Planned improvements may include:
+
 📧 Production email service
+
 📈 Portfolio analytics
+
 🔎 Advanced project filtering
+
 📝 Blog section
+
 📬 Contact form improvements
+
 🌐 Custom domain
+
 🧪 Automated testing
+
 🔄 CI/CD with GitHub Actions
 
 Author
 
 Djimrosngue Ngarhodjim Justin
+
 Python / Django Developer
 Interested in:
 Web Development
@@ -177,6 +191,7 @@ Software Engineering
 Data & Business Intelligence
 
 Contact
+
 For professional opportunities, collaborations or technical projects, feel free to connect with me through my professional profiles.
 
 License
