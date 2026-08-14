@@ -87,9 +87,13 @@ pip install -r requirements.txt
 Create a .env file from .env.example.
 Example:
 DJANGO_SECRET_KEY=your-secret-key
+
 DJANGO_DEBUG=True
+
 DATABASE_URL=
+
 RENDER_EXTERNAL_HOSTNAME=
+
 CUSTOM_DOMAIN=
 
 5. Apply migrations
