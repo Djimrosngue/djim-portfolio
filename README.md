@@ -59,50 +59,16 @@ The application is built with Django and includes bilingual support, a dynamic p
 - GitHub
 - Visual Studio Code
 
----
-
-## Project Architecture
-
-
-portfolio/
-│
-├── config/
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   └── ...
-│
-├── portfolio/
-│   ├── models.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── admin.py
-│   └── ...
-│
-├── templates/
-│   └── ...
-│
-├── static/
-│   └── ...
-│
-├── locale/
-│   ├── fr/
-│   └── en/
-│
-├── manage.py
-├── requirements.txt
-├── .env.example
-├── .gitignore
-└── README.md
 
 Local Installation
 
 1. Clone the repository
 
 git clone https://github.com/Djimrosngue/djim-portfolio.git
+
 cd djim-portfolio 
 
-3. Create a virtual environment
+2. Create a virtual environment
    
 Windows:
 python -m venv venv
@@ -112,11 +78,11 @@ Linux / macOS:
 python3 -m venv venv
 source venv/bin/activate
 
-5. Install dependencies
+ 3.Install dependencies
    
 pip install -r requirements.txt
 
-7. Configure environment variables
+4. Configure environment variables
    
 Create a .env file from .env.example.
 Example:
@@ -126,51 +92,34 @@ DATABASE_URL=
 RENDER_EXTERNAL_HOSTNAME=
 CUSTOM_DOMAIN=
 
-
-9. Apply migrations
+5. Apply migrations
     
 python manage.py migrate
 
-11. Create an administrator
+6. Create an administrator
     
 python manage.py createsuperuser
 
-13. Collect static files
+7. Collect static files
     
 python manage.py collectstatic
 
-15. Run the development server
+8. Run the development server
     
 python manage.py runserver
 The application will be available at:
 http://127.0.0.1:8000/
 
-Environment Variables
-Variable
-Description
-Required
-DJANGO_SECRET_KEY
-Django secret key
-Yes
-DJANGO_DEBUG
-Debug mode
-Yes
-DATABASE_URL
-PostgreSQL connection URL
-Production
-RENDER_EXTERNAL_HOSTNAME
-Render hostname
-Production
-CUSTOM_DOMAIN
-Optional custom domain
-No
-
 Database
 
 The project automatically uses:
+
 Development
+
 SQLite when DATABASE_URL is not configured.
+
 Production
+
 PostgreSQL when DATABASE_URL is provided.
 This allows the same project to work locally and in production without changing the source code.
 
